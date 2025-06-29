@@ -1,0 +1,1363 @@
+<html class="scroll-smooth" lang="id">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Kopi Senja - Penjualan Kopi
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&amp;display=swap" rel="stylesheet"/>
+  <style>
+   body {
+      font-family: 'Poppins', sans-serif;
+    }
+  </style>
+ </head>
+ <body class="bg-gray-50 min-h-screen flex flex-col">
+  <div class="flex-grow flex flex-col" id="app">
+   <!-- Navigation -->
+   <nav class="bg-yellow-600 text-white shadow-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
+     <div class="flex items-center space-x-4">
+      <button class="hover:bg-yellow-700 px-3 py-2 rounded-md font-semibold text-sm" id="btnBeranda">
+       Beranda
+      </button>
+      <button class="hover:bg-yellow-700 px-3 py-2 rounded-md font-semibold text-sm" id="btnMenu">
+       Menu Kopi
+      </button>
+      <button class="hover:bg-yellow-700 px-3 py-2 rounded-md font-semibold text-sm" id="btnKontak">
+       Kontak
+      </button>
+      <button class="hover:bg-yellow-700 px-3 py-2 rounded-md font-semibold text-sm" id="btnReservasi">
+       Reservasi
+      </button>
+     </div>
+     <div class="flex items-center space-x-4">
+      <button aria-label="Keranjang" class="relative hover:bg-yellow-700 px-3 py-2 rounded-md font-semibold text-sm" id="btnKeranjang">
+       <i class="fas fa-shopping-cart text-lg">
+       </i>
+       <span class="absolute -top-1 -right-1 bg-red-600 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center" id="cartCount">
+        0
+       </span>
+      </button>
+      <button class="bg-yellow-400 hover:bg-yellow-500 text-yellow-900 font-semibold px-3 py-2 rounded-md text-sm" id="btnPesanSekarang">
+       Pesan Sekarang
+      </button>
+      <!-- Tombol Admin Login -->
+      <button class="hover:bg-yellow-700 px-3 py-2 rounded-md font-semibold text-sm" id="btnAdminLogin">
+       Admin
+      </button>
+     </div>
+    </div>
+   </nav>
+   <!-- Pages Container -->
+   <main class="flex-grow max-w-7xl mx-auto p-4">
+    <!-- Halaman Pertama - Selamat Datang -->
+    <section class="space-y-8" id="pageWelcome">
+     <div class="text-center mt-12">
+      <h1 class="text-4xl font-extrabold text-yellow-700 mb-4">
+       Selamat Datang di Kopi Senja
+      </h1>
+      <p class="text-lg text-gray-700 max-w-xl mx-auto">
+       Nikmati suasana senja dengan secangkir kopi terbaik dari kami.
+      </p>
+     </div>
+     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+      <img alt="Cangkir kopi hitam dengan uap mengepul di atas meja kayu dengan latar belakang senja oranye" class="rounded-lg shadow-md object-cover w-full h-64" height="300" src="https://storage.googleapis.com/a1aa/image/00c06f19-e768-435d-2f05-64403e43fca6.jpg" width="400"/>
+      <img alt="Tumpukan biji kopi arabika berwarna coklat gelap dengan cahaya senja yang hangat" class="rounded-lg shadow-md object-cover w-full h-64" height="300" src="https://storage.googleapis.com/a1aa/image/55dae384-7846-463d-2c9f-edc5b99dd7fa.jpg" width="400"/>
+      <img alt="Cangkir kopi latte art berbentuk daun dengan latar belakang jendela yang menampilkan pemandangan senja" class="rounded-lg shadow-md object-cover w-full h-64" height="300" src="https://storage.googleapis.com/a1aa/image/aede7a2a-4385-4abd-c36b-8d39863f534a.jpg" width="400"/>
+      <img alt="Barista menuangkan kopi espresso ke dalam cangkir kecil dengan latar belakang lampu senja" class="rounded-lg shadow-md object-cover w-full h-64" height="300" src="https://storage.googleapis.com/a1aa/image/42dc5370-cb8a-4fb4-3758-9c19463aa837.jpg" width="400"/>
+      <img alt="Meja kayu dengan beberapa cangkir kopi berbeda jenis dan latar belakang senja berwarna jingga" class="rounded-lg shadow-md object-cover w-full h-64" height="300" src="https://storage.googleapis.com/a1aa/image/ba35697b-acdb-4991-22bc-67327ff11161.jpg" width="400"/>
+      <img alt="Close up biji kopi robusta berwarna coklat gelap dengan latar belakang senja yang lembut" class="rounded-lg shadow-md object-cover w-full h-64" height="300" src="https://storage.googleapis.com/a1aa/image/4f8bbb11-9422-4104-931d-0b1e72481aab.jpg" width="400"/>
+     </div>
+     <div class="text-center mt-8">
+      <button class="bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-3 px-8 rounded-lg text-lg shadow-lg transition" id="btnGoToDashboard">
+       Pesan Sekarang
+      </button>
+     </div>
+    </section>
+    <!-- Halaman Dashboard -->
+    <section class="hidden space-y-6" id="pageDashboard">
+     <h2 class="text-3xl font-bold text-yellow-700 mb-4">
+      Dashboard Kopi Senja
+     </h2>
+     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="bg-yellow-100 rounded-lg p-6 shadow hover:shadow-lg transition cursor-pointer" id="dashBeranda">
+       <i class="fas fa-home text-yellow-700 text-3xl mb-3">
+       </i>
+       <h3 class="font-semibold text-yellow-800 text-xl mb-2">
+        Beranda
+       </h3>
+       <p class="text-yellow-700 text-sm">
+        Tentang kopi dan Kopi Senja.
+       </p>
+      </div>
+      <div class="bg-yellow-100 rounded-lg p-6 shadow hover:shadow-lg transition cursor-pointer" id="dashMenu">
+       <i class="fas fa-coffee text-yellow-700 text-3xl mb-3">
+       </i>
+       <h3 class="font-semibold text-yellow-800 text-xl mb-2">
+        Menu Kopi
+       </h3>
+       <p class="text-yellow-700 text-sm">
+        Daftar menu kopi lengkap.
+       </p>
+      </div>
+      <div class="bg-yellow-100 rounded-lg p-6 shadow hover:shadow-lg transition cursor-pointer" id="dashKontak">
+       <i class="fas fa-address-book text-yellow-700 text-3xl mb-3">
+       </i>
+       <h3 class="font-semibold text-yellow-800 text-xl mb-2">
+        Kontak
+       </h3>
+       <p class="text-yellow-700 text-sm">
+        Nomor, alamat, dan lokasi maps.
+       </p>
+      </div>
+      <div class="bg-yellow-100 rounded-lg p-6 shadow hover:shadow-lg transition cursor-pointer" id="dashReservasi">
+       <i class="fas fa-calendar-check text-yellow-700 text-3xl mb-3">
+       </i>
+       <h3 class="font-semibold text-yellow-800 text-xl mb-2">
+        Reservasi
+       </h3>
+       <p class="text-yellow-700 text-sm">
+        Pesan kopi dan reservasi tempat.
+       </p>
+      </div>
+      <div class="bg-yellow-100 rounded-lg p-6 shadow hover:shadow-lg transition cursor-pointer" id="dashKeranjang">
+       <i class="fas fa-shopping-cart text-yellow-700 text-3xl mb-3">
+       </i>
+       <h3 class="font-semibold text-yellow-800 text-xl mb-2">
+        Keranjang
+       </h3>
+       <p class="text-yellow-700 text-sm">
+        Lihat dan kelola pesanan kopi.
+       </p>
+      </div>
+      <div class="bg-yellow-100 rounded-lg p-6 shadow hover:shadow-lg transition cursor-pointer" id="dashPesanSekarang">
+       <i class="fas fa-hand-holding-usd text-yellow-700 text-3xl mb-3">
+       </i>
+       <h3 class="font-semibold text-yellow-800 text-xl mb-2">
+        Pesan Sekarang
+       </h3>
+       <p class="text-yellow-700 text-sm">
+        Pesan kopi dengan metode lengkap.
+       </p>
+      </div>
+     </div>
+    </section>
+    <!-- Halaman Kontak -->
+    <section class="hidden max-w-3xl mx-auto space-y-6" id="pageKontak">
+     <h2 class="text-3xl font-bold text-yellow-700 mb-4 text-center">
+      Kontak Kopi Senja
+     </h2>
+     <div class="bg-yellow-50 rounded-lg p-6 shadow">
+      <div class="mb-4">
+       <h3 class="font-semibold text-yellow-800 text-xl mb-2">
+        Nomor Telepon
+       </h3>
+       <p class="text-yellow-700 text-lg">
+        <i class="fas fa-phone-alt mr-2">
+        </i>
+        +62 812 3456 7890
+       </p>
+      </div>
+      <div class="mb-4">
+       <h3 class="font-semibold text-yellow-800 text-xl mb-2">
+        Alamat
+       </h3>
+       <p class="text-yellow-700 text-lg">
+        Jl. Senja Indah No. 45, Kota Kopi, Indonesia
+       </p>
+      </div>
+      <div>
+       <h3 class="font-semibold text-yellow-800 text-xl mb-2">
+        Lokasi Maps
+       </h3>
+       <img alt="Peta lokasi kedai kopi Kopi Senja di jalan Senja Indah No. 45 dengan ikon pin merah" class="rounded-lg shadow-md w-full h-64 object-cover" height="300" src="https://storage.googleapis.com/a1aa/image/3677f8ce-f5f7-4799-8c1d-758c1419b3b8.jpg" width="600"/>
+      </div>
+     </div>
+    </section>
+    <!-- Halaman Beranda -->
+    <section class="hidden max-w-4xl mx-auto space-y-6" id="pageBeranda">
+     <h2 class="text-3xl font-bold text-yellow-700 mb-4 text-center">
+      Tentang Kopi Senja
+     </h2>
+     <p class="text-yellow-900 text-lg leading-relaxed">
+      Kopi Senja adalah kedai kopi yang mengutamakan kualitas dan suasana yang nyaman untuk menikmati kopi terbaik. Kami menggunakan biji kopi pilihan dari petani lokal yang diproses dengan teknik terbaik untuk menghasilkan cita rasa yang khas dan nikmat. Suasana senja yang hangat dan damai menjadi inspirasi kami dalam menyajikan kopi yang dapat menemani setiap momen Anda.
+     </p>
+     <img alt="Interior kedai kopi Kopi Senja dengan suasana senja hangat dan pelanggan menikmati kopi" class="rounded-lg shadow-md w-full object-cover" height="400" src="https://storage.googleapis.com/a1aa/image/fdd14880-1a3e-4e4e-d528-d6bf923aadd0.jpg" width="800"/>
+    </section>
+    <!-- Halaman Menu Kopi -->
+    <section class="hidden max-w-6xl mx-auto space-y-8" id="pageMenu">
+     <h2 class="text-3xl font-bold text-yellow-700 mb-6 text-center">
+      Menu Kopi Kopi Senja
+     </h2>
+     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6" id="menuList">
+      <!-- Menu items will be rendered here by JavaScript -->
+     </div>
+    </section>
+    <!-- Halaman Keranjang -->
+    <section class="hidden max-w-4xl mx-auto space-y-6" id="pageKeranjang">
+     <h2 class="text-3xl font-bold text-yellow-700 mb-4 text-center">
+      Keranjang Pesanan
+     </h2>
+     <div class="space-y-4" id="cartItems">
+      <p class="text-yellow-700 text-center">
+       Keranjang kosong.
+      </p>
+     </div>
+     <div class="text-right">
+      <button class="bg-yellow-600 hover:bg-yellow-700 text-white font-semibold py-2 px-6 rounded-md disabled:opacity-50 disabled:cursor-not-allowed" disabled="" id="btnCheckout">
+       Checkout
+      </button>
+     </div>
+    </section>
+    <!-- Halaman Reservasi & Pesan Sekarang -->
+    <section class="hidden max-w-4xl mx-auto space-y-6" id="pagePesanSekarang">
+     <h2 class="text-3xl font-bold text-yellow-700 mb-4 text-center">
+      Pesan Sekarang
+     </h2>
+     <p class="text-yellow-900 text-center mb-6">
+      Pilih metode pemesanan kopi Anda:
+     </p>
+     <div class="flex justify-center space-x-6 mb-8">
+      <button class="bg-yellow-600 hover:bg-yellow-700 text-white font-semibold py-2 px-6 rounded-md" id="metode1Btn">
+       Pesan &amp; Reservasi Tempat
+      </button>
+      <button class="bg-yellow-400 hover:bg-yellow-500 text-yellow-900 font-semibold py-2 px-6 rounded-md" id="metode2Btn">
+       Pesan &amp; Pilih Ekspedisi
+      </button>
+     </div>
+     <!-- Form Metode 1 -->
+     <form autocomplete="off" class="hidden bg-yellow-50 rounded-lg p-6 shadow space-y-6" id="formMetode1">
+      <h3 class="text-yellow-700 font-semibold text-xl mb-4 text-center">
+       Pesan Kopi &amp; Reservasi Tempat
+      </h3>
+      <div>
+       <label class="block font-semibold text-yellow-800 mb-1" for="met1Kopi">
+        Pilih Kopi
+       </label>
+       <select class="w-full rounded-md border border-yellow-300 p-2" id="met1Kopi" name="kopi" required="">
+        <option disabled="" selected="" value="">
+         Pilih menu kopi
+        </option>
+       </select>
+      </div>
+      <div>
+       <label class="block font-semibold text-yellow-800 mb-1" for="met1Jumlah">
+        Jumlah
+       </label>
+       <input class="w-full rounded-md border border-yellow-300 p-2" id="met1Jumlah" min="1" name="jumlah" required="" type="number" value="1"/>
+      </div>
+      <div>
+       <label class="block font-semibold text-yellow-800 mb-1" for="met1Nama">
+        Nama Lengkap
+       </label>
+       <input class="w-full rounded-md border border-yellow-300 p-2" id="met1Nama" name="nama" placeholder="Nama Anda" required="" type="text"/>
+      </div>
+      <div>
+       <label class="block font-semibold text-yellow-800 mb-1" for="met1NoHp">
+        Nomor HP
+       </label>
+       <input class="w-full rounded-md border border-yellow-300 p-2" id="met1NoHp" name="nohp" pattern="[0-9+ ]+" placeholder="+62 812 3456 7890" required="" type="tel"/>
+      </div>
+      <div>
+       <label class="block font-semibold text-yellow-800 mb-1" for="met1Tanggal">
+        Tanggal Reservasi
+       </label>
+       <input class="w-full rounded-md border border-yellow-300 p-2" id="met1Tanggal" min="" name="tanggal" required="" type="date"/>
+      </div>
+      <div>
+       <label class="block font-semibold text-yellow-800 mb-1" for="met1Pembayaran">
+        Metode Pembayaran
+       </label>
+       <select class="w-full rounded-md border border-yellow-300 p-2" id="met1Pembayaran" name="pembayaran" required="">
+        <option disabled="" selected="" value="">
+         Pilih metode pembayaran
+        </option>
+        <option value="Transfer Bank">
+         Transfer Bank
+        </option>
+        <option value="Cash">
+         Cash
+        </option>
+        <option value="E-Wallet">
+         E-Wallet
+        </option>
+       </select>
+      </div>
+      <div class="text-center">
+       <button class="bg-yellow-600 hover:bg-yellow-700 text-white font-semibold py-2 px-6 rounded-md" type="submit">
+        Pesan &amp; Dapatkan Resi PDF
+       </button>
+      </div>
+     </form>
+     <!-- Form Metode 2 -->
+     <form autocomplete="off" class="hidden bg-yellow-50 rounded-lg p-6 shadow space-y-6" id="formMetode2">
+      <h3 class="text-yellow-700 font-semibold text-xl mb-4 text-center">
+       Pesan Kopi &amp; Pilih Ekspedisi
+      </h3>
+      <div>
+       <label class="block font-semibold text-yellow-800 mb-1" for="met2Kopi">
+        Pilih Kopi
+       </label>
+       <select class="w-full rounded-md border border-yellow-300 p-2" id="met2Kopi" name="kopi" required="">
+        <option disabled="" selected="" value="">
+         Pilih menu kopi
+        </option>
+       </select>
+      </div>
+      <div>
+       <label class="block font-semibold text-yellow-800 mb-1" for="met2Jumlah">
+        Jumlah
+       </label>
+       <input class="w-full rounded-md border border-yellow-300 p-2" id="met2Jumlah" min="1" name="jumlah" required="" type="number" value="1"/>
+      </div>
+      <div>
+       <label class="block font-semibold text-yellow-800 mb-1" for="met2Nama">
+        Nama Lengkap
+       </label>
+       <input class="w-full rounded-md border border-yellow-300 p-2" id="met2Nama" name="nama" placeholder="Nama Anda" required="" type="text"/>
+      </div>
+      <div>
+       <label class="block font-semibold text-yellow-800 mb-1" for="met2NoHp">
+        Nomor HP
+       </label>
+       <input class="w-full rounded-md border border-yellow-300 p-2" id="met2NoHp" name="nohp" pattern="[0-9+ ]+" placeholder="+62 812 3456 7890" required="" type="tel"/>
+      </div>
+      <div>
+       <label class="block font-semibold text-yellow-800 mb-1" for="met2Pembayaran">
+        Metode Pembayaran
+       </label>
+       <select class="w-full rounded-md border border-yellow-300 p-2" id="met2Pembayaran" name="pembayaran" required="">
+        <option disabled="" selected="" value="">
+         Pilih metode pembayaran
+        </option>
+        <option value="Transfer Bank">
+         Transfer Bank
+        </option>
+        <option value="Cash">
+         Cash
+        </option>
+        <option value="E-Wallet">
+         E-Wallet
+        </option>
+       </select>
+      </div>
+      <div>
+       <label class="block font-semibold text-yellow-800 mb-1" for="met2Ekspedisi">
+        Pilih Ekspedisi
+       </label>
+       <select class="w-full rounded-md border border-yellow-300 p-2" id="met2Ekspedisi" name="ekspedisi" required="">
+        <option disabled="" selected="" value="">
+         Pilih ekspedisi
+        </option>
+        <option value="JNE">
+         JNE
+        </option>
+        <option value="TIKI">
+         TIKI
+        </option>
+        <option value="POS Indonesia">
+         POS Indonesia
+        </option>
+        <option value="GoSend">
+         GoSend
+        </option>
+        <option value="GrabExpress">
+         GrabExpress
+        </option>
+       </select>
+      </div>
+      <div class="text-center">
+       <button class="bg-yellow-600 hover:bg-yellow-700 text-white font-semibold py-2 px-6 rounded-md" type="submit">
+        Pesan &amp; Dapatkan Resi PDF
+       </button>
+      </div>
+     </form>
+    </section>
+    <!-- Halaman Ulasan -->
+    <section class="hidden max-w-4xl mx-auto space-y-6" id="pageUlasan">
+     <h2 class="text-3xl font-bold text-yellow-700 mb-4 text-center">
+      Ulasan Pelanggan
+     </h2>
+     <form autocomplete="off" class="bg-yellow-50 rounded-lg p-6 shadow space-y-4" id="formUlasan">
+      <div>
+       <label class="block font-semibold text-yellow-800 mb-1" for="ulasanNama">
+        Nama
+       </label>
+       <input class="w-full rounded-md border border-yellow-300 p-2" id="ulasanNama" name="nama" placeholder="Nama Anda" required="" type="text"/>
+      </div>
+      <div>
+       <label class="block font-semibold text-yellow-800 mb-1" for="ulasanText">
+        Ulasan
+       </label>
+       <textarea class="w-full rounded-md border border-yellow-300 p-2" id="ulasanText" name="ulasan" placeholder="Tulis ulasan Anda di sini..." required="" rows="4"></textarea>
+      </div>
+      <div class="text-center">
+       <button class="bg-yellow-600 hover:bg-yellow-700 text-white font-semibold py-2 px-6 rounded-md" type="submit">
+        Kirim Ulasan
+       </button>
+      </div>
+     </form>
+     <div class="space-y-4" id="ulasanList">
+      <p class="text-yellow-700 text-center">
+       Belum ada ulasan.
+      </p>
+     </div>
+    </section>
+
+    <!-- Halaman Admin Login -->
+    <section class="hidden max-w-md mx-auto space-y-6" id="pageAdminLogin">
+        <h2 class="text-3xl font-bold text-yellow-700 mb-4 text-center">Admin Login</h2>
+        <form autocomplete="off" class="bg-yellow-50 rounded-lg p-6 shadow space-y-4" id="formAdminLogin">
+            <div>
+                <label class="block font-semibold text-yellow-800 mb-1" for="adminUsername">Username</label>
+                <input class="w-full rounded-md border border-yellow-300 p-2" id="adminUsername" name="username" type="text" required />
+            </div>
+            <div>
+                <label class="block font-semibold text-yellow-800 mb-1" for="adminPassword">Password</label>
+                <input class="w-full rounded-md border border-yellow-300 p-2" id="adminPassword" name="password" type="password" required />
+            </div>
+            <div class="text-center">
+                <button class="bg-yellow-600 hover:bg-yellow-700 text-white font-semibold py-2 px-6 rounded-md" type="submit">Login</button>
+            </div>
+        </form>
+    </section>
+
+    <!-- Halaman Admin Dashboard -->
+    <section class="hidden max-w-6xl mx-auto space-y-6" id="pageAdminDashboard">
+        <h2 class="text-3xl font-bold text-yellow-700 mb-4 text-center">Admin Dashboard - Kelola Menu</h2>
+
+        <!-- Form Tambah/Edit Menu -->
+        <div class="bg-yellow-50 rounded-lg p-6 shadow space-y-4">
+            <h3 class="font-semibold text-yellow-800 text-xl mb-2" id="menuFormTitle">Tambah Menu Baru</h3>
+            <form autocomplete="off" id="formMenuCrud" class="space-y-4">
+                <input type="hidden" id="menuId" />
+                <div>
+                    <label class="block font-semibold text-yellow-800 mb-1" for="menuName">Nama Kopi</label>
+                    <input class="w-full rounded-md border border-yellow-300 p-2" id="menuName" type="text" required />
+                </div>
+                <div>
+                    <label class="block font-semibold text-yellow-800 mb-1" for="menuPrice">Harga (Rp)</label>
+                    <input class="w-full rounded-md border border-yellow-300 p-2" id="menuPrice" type="number" min="0" required />
+                </div>
+                <div>
+                    <label class="block font-semibold text-yellow-800 mb-1" for="menuImg">URL Gambar</label>
+                    <input class="w-full rounded-md border border-yellow-300 p-2" id="menuImg" type="url" placeholder="Contoh: https://placehold.co/400x300" />
+                </div>
+                <div>
+                    <label class="block font-semibold text-yellow-800 mb-1" for="menuAlt">Deskripsi Gambar (Alt Text)</label>
+                    <input class="w-full rounded-md border border-yellow-300 p-2" id="menuAlt" type="text" placeholder="Contoh: Cangkir kopi hitam pekat" />
+                </div>
+                <div>
+                    <label class="block font-semibold text-yellow-800 mb-1" for="menuDesc">Deskripsi Kopi</label>
+                    <textarea class="w-full rounded-md border border-yellow-300 p-2" id="menuDesc" rows="3" placeholder="Contoh: Kopi hitam pekat dengan rasa kuat dan aroma khas."></textarea>
+                </div>
+                <div class="text-center">
+                    <button class="bg-yellow-600 hover:bg-yellow-700 text-white font-semibold py-2 px-6 rounded-md" type="submit" id="btnSaveMenu">Tambah Menu</button>
+                    <button class="bg-gray-400 hover:bg-gray-500 text-white font-semibold py-2 px-6 rounded-md hidden" type="button" id="btnCancelEdit">Batal Edit</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Daftar Menu -->
+        <div class="bg-yellow-50 rounded-lg p-6 shadow">
+            <h3 class="font-semibold text-yellow-800 text-xl mb-4">Daftar Menu Saat Ini</h3>
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white rounded-lg shadow-md">
+                    <thead>
+                        <tr class="bg-yellow-200 text-yellow-800 uppercase text-sm leading-normal">
+                            <th class="py-3 px-6 text-left">Nama</th>
+                            <th class="py-3 px-6 text-left">Harga</th>
+                            <th class="py-3 px-6 text-left">Deskripsi</th>
+                            <th class="py-3 px-6 text-center">Gambar</th>
+                            <th class="py-3 px-6 text-center">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-yellow-700 text-sm font-light" id="adminMenuList">
+                        <!-- Menu items will be rendered here -->
+                    </tbody>
+                </table>
+            </div>
+            <p class="text-yellow-700 text-center mt-4 hidden" id="noAdminMenuMessage">Belum ada menu.</p>
+        </div>
+
+        <div class="text-center mt-6">
+            <button class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-6 rounded-md" id="btnAdminLogout">Logout Admin</button>
+        </div>
+    </section>
+
+   </main>
+  </div>
+  <footer class="bg-yellow-600 text-white text-center py-4 mt-auto">
+   <p>
+    © 2024 Kopi Senja. Semua hak cipta dilindungi.
+   </p>
+  </footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js">
+  </script>
+  <script>
+   (() => {
+      const {
+        jsPDF
+      } = window.jspdf;
+
+      // Pages
+      const pageWelcome = document.getElementById('pageWelcome');
+      const pageDashboard = document.getElementById('pageDashboard');
+      const pageKontak = document.getElementById('pageKontak');
+      const pageBeranda = document.getElementById('pageBeranda');
+      const pageMenu = document.getElementById('pageMenu');
+      const pageKeranjang = document.getElementById('pageKeranjang');
+      const pagePesanSekarang = document.getElementById('pagePesanSekarang');
+      const pageUlasan = document.getElementById('pageUlasan');
+      const pageAdminLogin = document.getElementById('pageAdminLogin'); // New
+      const pageAdminDashboard = document.getElementById('pageAdminDashboard'); // New
+
+      // Buttons
+      const btnGoToDashboard = document.getElementById('btnGoToDashboard');
+      const btnBeranda = document.getElementById('btnBeranda');
+      const btnMenu = document.getElementById('btnMenu');
+      const btnKontak = document.getElementById('btnKontak');
+      const btnReservasi = document.getElementById('btnReservasi');
+      const btnKeranjang = document.getElementById('btnKeranjang');
+      const btnPesanSekarang = document.getElementById('btnPesanSekarang');
+      const btnAdminLogin = document.getElementById('btnAdminLogin'); // New
+      const btnAdminLogout = document.getElementById('btnAdminLogout'); // New
+
+      // Dashboard cards
+      const dashBeranda = document.getElementById('dashBeranda');
+      const dashMenu = document.getElementById('dashMenu');
+      const dashKontak = document.getElementById('dashKontak');
+      const dashReservasi = document.getElementById('dashReservasi');
+      const dashKeranjang = document.getElementById('dashKeranjang');
+      const dashPesanSekarang = document.getElementById('dashPesanSekarang');
+
+      // Forms and buttons for metode
+      const metode1Btn = document.getElementById('metode1Btn');
+      const metode2Btn = document.getElementById('metode2Btn');
+      const formMetode1 = document.getElementById('formMetode1');
+      const formMetode2 = document.getElementById('formMetode2');
+
+      // Menu list container
+      const menuList = document.getElementById('menuList');
+
+      // Cart
+      const cartItems = document.getElementById('cartItems');
+      const cartCount = document.getElementById('cartCount');
+      const btnCheckout = document.getElementById('btnCheckout');
+
+      // Ulasan
+      const formUlasan = document.getElementById('formUlasan');
+      const ulasanList = document.getElementById('ulasanList');
+
+      // Selects in forms
+      const met1Kopi = document.getElementById('met1Kopi');
+      const met2Kopi = document.getElementById('met2Kopi');
+
+      // Admin Elements (New)
+      const formAdminLogin = document.getElementById('formAdminLogin');
+      const adminUsernameInput = document.getElementById('adminUsername');
+      const adminPasswordInput = document.getElementById('adminPassword');
+      const formMenuCrud = document.getElementById('formMenuCrud');
+      const menuIdInput = document.getElementById('menuId');
+      const menuNameInput = document.getElementById('menuName');
+      const menuPriceInput = document.getElementById('menuPrice');
+      const menuImgInput = document.getElementById('menuImg');
+      const menuAltInput = document.getElementById('menuAlt');
+      const menuDescInput = document.getElementById('menuDesc');
+      const btnSaveMenu = document.getElementById('btnSaveMenu');
+      const btnCancelEdit = document.getElementById('btnCancelEdit');
+      const menuFormTitle = document.getElementById('menuFormTitle');
+      const adminMenuList = document.getElementById('adminMenuList');
+      const noAdminMenuMessage = document.getElementById('noAdminMenuMessage');
+
+
+      // Data
+      // Initial menu data (will be overridden by localStorage if available)
+      let menuKopi = [
+        {
+          id: 'espresso',
+          name: 'Espresso',
+          price: 15000,
+          img: 'https://storage.googleapis.com/a1aa/image/ebf35d29-2d92-4027-fb20-65b0d4997b2c.jpg',
+          alt: 'Cangkir espresso hitam pekat dengan latar belakang kayu gelap',
+          desc: 'Kopi hitam pekat dengan rasa kuat dan aroma khas.',
+        },
+        {
+          id: 'latte',
+          name: 'Latte',
+          price: 20000,
+          img: 'https://storage.googleapis.com/a1aa/image/974a712d-8531-48e3-54dd-b3e7d868417d.jpg',
+          alt: 'Cangkir latte dengan seni latte art berbentuk daun di atas busa susu',
+          desc: 'Kopi susu lembut dengan busa susu yang creamy.',
+        },
+        {
+          id: 'cappuccino',
+          name: 'Cappuccino',
+          price: 22000,
+          img: 'https://storage.googleapis.com/a1aa/image/f5f150f3-aef1-48ed-6e16-2149467f697c.jpg',
+          alt: 'Cangkir cappuccino dengan busa susu tebal dan taburan bubuk coklat',
+          desc: 'Kopi dengan busa susu tebal dan rasa seimbang.',
+        },
+        {
+          id: 'americano',
+          name: 'Americano',
+          price: 18000,
+          img: 'https://storage.googleapis.com/a1aa/image/ddb8b06e-9d19-4300-5b0b-876e8e377654.jpg',
+          alt: 'Cangkir americano dengan kopi hitam dan latar belakang meja kayu',
+          desc: 'Kopi hitam encer dengan rasa ringan dan segar.',
+        },
+        {
+          id: 'mocha',
+          name: 'Mocha',
+          price: 25000,
+          img: 'https://storage.googleapis.com/a1aa/image/2b4c75bb-e9f0-4a04-a321-c340cfbfe99a.jpg',
+          alt: 'Cangkir mocha dengan lapisan coklat dan busa susu di atasnya',
+          desc: 'Kopi susu dengan rasa coklat yang manis dan lembut.',
+        },
+        {
+          id: 'macchiato',
+          name: 'Macchiato',
+          price: 21000,
+          img: 'https://storage.googleapis.com/a1aa/image/417d0f6b-6b4b-4142-498d-76cddc5b815e.jpg',
+          alt: 'Cangkir macchiato dengan lapisan busa susu tipis di atas espresso',
+          desc: 'Espresso dengan sedikit busa susu di atasnya.',
+        },
+        {
+          id: 'affogato',
+          name: 'Affogato',
+          price: 28000,
+          img: 'https://storage.googleapis.com/a1aa/image/eaaa2e1a-4b22-4ec9-ed57-d91e00ae0d39.jpg',
+          alt: 'Cangkir affogato dengan es krim vanila dan espresso dituangkan di atasnya',
+          desc: 'Espresso dengan es krim vanila yang menyegarkan.',
+        },
+        {
+          id: 'cold-brew',
+          name: 'Cold Brew',
+          price: 30000,
+          img: 'https://storage.googleapis.com/a1aa/image/d80e377e-0020-4a94-56cb-878d49df4669.jpg',
+          alt: 'Gelaskopi cold brew dengan es batu dan latar belakang kayu gelap',
+          desc: 'Kopi dingin dengan rasa halus dan menyegarkan.',
+        },
+        {
+          id: 'kopi-tubruk',
+          name: 'Kopi Tubruk',
+          price: 12000,
+          img: 'https://storage.googleapis.com/a1aa/image/49fcdba1-b8ef-4822-4d52-65a2567f68f9.jpg',
+          alt: 'Cangkir kopi tubruk tradisional dengan latar belakang meja kayu dan sendok kecil',
+          desc: 'Kopi tradisional Indonesia dengan rasa kuat dan pekat.',
+        },
+        {
+          id: 'kopi-senja-special',
+          name: 'Kopi Senja Special',
+          price: 35000,
+          img: 'https://placehold.co/400x300?text=Kopi+Senja+Special&bg=6b4c3b&fg=fff',
+          alt: 'Cangkir kopi spesial dengan latte art unik dan latar belakang senja',
+          desc: 'Kopi spesial racikan Kopi Senja dengan cita rasa unik.',
+        },
+      ];
+
+      // Cart data structure: array of {name, price, quantity}
+      let cart = [];
+
+      // Ulasan data structure: array of {id, nama, ulasan}
+      let ulasanData = [];
+
+      // Admin credentials (New)
+      const ADMIN_USERNAME = 'admin';
+      const ADMIN_PASSWORD = 'adminpassword'; // Ganti dengan password yang lebih kuat di produksi!
+      const ADMIN_LOGGED_IN_KEY = 'adminLoggedIn';
+      const MENU_DATA_KEY = 'menuKopiData';
+
+      // Promo hari ini
+      const promoHariIni = {
+        title: 'Promo Kopi Senja Hari Ini',
+        description: 'Diskon 20% untuk semua menu kopi dari jam 16.00 - 19.00 WIB',
+      };
+
+      // Initialize date input min attribute for metode1Tanggal
+      const todayISO = new Date().toISOString().split('T')[0];
+      document.getElementById('met1Tanggal').setAttribute('min', todayISO);
+
+      // Helper: Show only one page
+      function showPage(page) {
+        [
+          pageWelcome,
+          pageDashboard,
+          pageKontak,
+          pageBeranda,
+          pageMenu,
+          pageKeranjang,
+          pagePesanSekarang,
+          pageUlasan,
+          pageAdminLogin, // New
+          pageAdminDashboard, // New
+        ].forEach((p) => {
+          p.classList.add('hidden');
+        });
+        page.classList.remove('hidden');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      // Helper: Save menu data to localStorage (New)
+      function saveMenuData() {
+        localStorage.setItem(MENU_DATA_KEY, JSON.stringify(menuKopi));
+      }
+
+      // Helper: Load menu data from localStorage (New)
+      function loadMenuData() {
+        const storedMenu = localStorage.getItem(MENU_DATA_KEY);
+        if (storedMenu) {
+          menuKopi = JSON.parse(storedMenu);
+        } else {
+            // If no data in localStorage, save initial data
+            saveMenuData();
+        }
+      }
+
+      // Initialize menu selects in forms
+      function initMenuSelects() {
+        [met1Kopi, met2Kopi].forEach((select) => {
+          select.innerHTML =
+            '<option value="" disabled selected>Pilih menu kopi</option>';
+          menuKopi.forEach((item) => {
+            const option = document.createElement('option');
+            option.value = item.name;
+            option.textContent = `${item.name} - Rp${item.price.toLocaleString()}`;
+            select.appendChild(option);
+          });
+        });
+      }
+
+      // Update cart count badge
+      function updateCartCount() {
+        const totalQty = cart.reduce((acc, item) => acc + item.quantity, 0);
+        cartCount.textContent = totalQty;
+        btnCheckout.disabled = totalQty === 0;
+      }
+
+      // Render cart items
+      function renderCart() {
+        cartItems.innerHTML = '';
+        if (cart.length === 0) {
+          cartItems.innerHTML =
+            '<p class="text-yellow-700 text-center">Keranjang kosong.</p>';
+          btnCheckout.disabled = true;
+          return;
+        }
+        cart.forEach((item, index) => {
+          const div = document.createElement('div');
+          div.className =
+            'flex items-center justify-between bg-yellow-50 rounded-lg p-4 shadow';
+          div.innerHTML = `
+            <div class="flex items-center space-x-4">
+              <img src="${
+                menuKopi.find((m) => m.name === item.name)?.img || ''
+              }" alt="Gambar kopi ${item.name}" class="w-20 h-20 object-cover rounded-md" />
+              <div>
+                <h4 class="font-semibold text-yellow-800 text-lg">${item.name}</h4>
+                <p class="text-yellow-700">Harga: Rp${item.price.toLocaleString()}</p>
+                <p class="text-yellow-700">Jumlah: ${item.quantity}</p>
+                <p class="text-yellow-700 font-semibold">Subtotal: Rp${(
+                  item.price * item.quantity
+                ).toLocaleString()}</p>
+              </div>
+            </div>
+            <div class="flex flex-col space-y-2">
+              <button data-index="${index}" class="btnEditCart bg-yellow-400 hover:bg-yellow-500 text-yellow-900 font-semibold py-1 px-3 rounded-md text-sm">
+                <i class="fas fa-edit"></i>
+              </button>
+              <button data-index="${index}" class="btnRemoveCart bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-3 rounded-md text-sm">
+                <i class="fas fa-trash-alt"></i>
+              </button>
+            </div>
+          `;
+          cartItems.appendChild(div);
+        });
+      }
+
+      // Add item to cart
+      function addToCart(name, price, quantity) {
+        const existing = cart.find((item) => item.name === name);
+        if (existing) {
+          existing.quantity += quantity;
+        } else {
+          cart.push({ name, price, quantity });
+        }
+        updateCartCount();
+        renderCart();
+      }
+
+      // Remove item from cart by index
+      function removeFromCart(index) {
+        cart.splice(index, 1);
+        updateCartCount();
+        renderCart();
+      }
+
+      // Edit item quantity in cart by index
+      function editCartItem(index) {
+        const item = cart[index];
+        const newQty = prompt(
+          `Ubah jumlah untuk ${item.name} (jumlah saat ini: ${item.quantity}):`,
+          item.quantity
+        );
+        if (newQty !== null) {
+          const qtyNum = parseInt(newQty);
+          if (!isNaN(qtyNum) && qtyNum > 0) {
+            item.quantity = qtyNum;
+            updateCartCount();
+            renderCart();
+          } else {
+            alert('Jumlah tidak valid.');
+          }
+        }
+      }
+
+      // Render ulasan list
+      function renderUlasan() {
+        ulasanList.innerHTML = '';
+        if (ulasanData.length === 0) {
+          ulasanList.innerHTML =
+            '<p class="text-yellow-700 text-center">Belum ada ulasan.</p>';
+          return;
+        }
+        ulasanData.forEach((ulasan) => {
+          const div = document.createElement('div');
+          div.className =
+            'bg-yellow-50 rounded-lg p-4 shadow space-y-2 relative';
+          div.innerHTML = `
+            <p class="font-semibold text-yellow-800">${ulasan.nama}</p>
+            <p class="text-yellow-700 whitespace-pre-line">${ulasan.ulasan}</p>
+            <button data-id="${ulasan.id}" class="btnEditUlasan absolute top-2 right-2 text-yellow-600 hover:text-yellow-800" title="Edit Ulasan">
+              <i class="fas fa-edit"></i>
+            </button>
+          `;
+          ulasanList.appendChild(div);
+        });
+      }
+
+      // Edit ulasan by id
+      function editUlasan(id) {
+        const ulasan = ulasanData.find((u) => u.id === id);
+        if (!ulasan) return;
+        const newText = prompt('Edit ulasan Anda:', ulasan.ulasan);
+        if (newText !== null && newText.trim() !== '') {
+          ulasan.ulasan = newText.trim();
+          renderUlasan();
+        }
+      }
+
+      // Generate PDF Resi
+      function generatePDF(data, metode) {
+        const doc = new jsPDF({
+          orientation: 'portrait',
+          unit: 'pt',
+          format: 'a4',
+        });
+
+        // Background color
+        doc.setFillColor(255, 235, 59); // Yellow 400
+        doc.rect(0, 0, doc.internal.pageSize.width, doc.internal.pageSize.height, 'F');
+
+        // Title
+        doc.setFontSize(22);
+        doc.setTextColor(91, 55, 0); // Dark brown
+        doc.setFont('helvetica', 'bold');
+        doc.text('Resi Pesanan Kopi Senja', doc.internal.pageSize.width / 2, 60, {
+          align: 'center',
+        });
+
+        doc.setDrawColor(91, 55, 0);
+        doc.setLineWidth(1);
+        doc.line(40, 75, doc.internal.pageSize.width - 40, 75);
+
+        doc.setFontSize(14);
+        doc.setFont('helvetica', 'normal');
+        let y = 110;
+
+        doc.setTextColor(61, 39, 0);
+        doc.text(`Nama: ${data.nama}`, 50, y);
+        y += 25;
+        doc.text(`Nomor HP: ${data.nohp}`, 50, y);
+        y += 25;
+        doc.text(`Kopi: ${data.kopi}`, 50, y);
+        y += 25;
+        doc.text(`Jumlah: ${data.jumlah}`, 50, y);
+        y += 25;
+        doc.text(`Harga per pcs: Rp${data.harga.toLocaleString()}`, 50, y);
+        y += 25;
+        doc.text(`Total Harga: Rp${(data.harga * data.jumlah).toLocaleString()}`, 50, y);
+        y += 25;
+        doc.text(`Metode Pembayaran: ${data.pembayaran}`, 50, y);
+        y += 25;
+
+        if (metode === 1) {
+          doc.text(`Tanggal Reservasi: ${data.tanggal}`, 50, y);
+          y += 25;
+          doc.text('Metode: Pesan & Reservasi Tempat', 50, y);
+          y += 25;
+        } else if (metode === 2) {
+          doc.text(`Ekspedisi: ${data.ekspedisi}`, 50, y);
+          y += 25;
+          doc.text('Metode: Pesan & Pilih Ekspedisi', 50, y);
+          y += 25;
+        }
+
+        doc.setFont('helvetica', 'bold');
+        doc.setTextColor(91, 55, 0);
+        doc.text('Terima kasih telah memesan di Kopi Senja!', doc.internal.pageSize.width / 2, y + 40, {
+          align: 'center',
+        });
+
+        return doc;
+      }
+
+      // Add promo display in dashboard
+      function renderPromo() {
+        const promoDiv = document.createElement('div');
+        promoDiv.className =
+          'bg-yellow-200 border border-yellow-400 rounded-lg p-4 mt-6 max-w-4xl mx-auto shadow';
+        promoDiv.innerHTML = `
+          <h3 class="text-yellow-800 font-bold text-xl mb-2">${promoHariIni.title}</h3>
+          <p class="text-yellow-700">${promoHariIni.description}</p>
+        `;
+        pageDashboard.appendChild(promoDiv);
+      }
+
+      // --- Admin Functions (New) ---
+
+      // Check admin login status
+      function isAdminLoggedIn() {
+        return localStorage.getItem(ADMIN_LOGGED_IN_KEY) === 'true';
+      }
+
+      // Set admin login status
+      function setAdminLoggedIn(status) {
+        localStorage.setItem(ADMIN_LOGGED_IN_KEY, status);
+      }
+
+      // Render menu items for public view
+      function renderPublicMenu() {
+        menuList.innerHTML = '';
+        if (menuKopi.length === 0) {
+            menuList.innerHTML = '<p class="text-yellow-700 text-center col-span-full">Belum ada menu yang tersedia.</p>';
+            return;
+        }
+        menuKopi.forEach((item) => {
+          const div = document.createElement('div');
+          div.className = 'bg-yellow-50 rounded-lg shadow-md overflow-hidden flex flex-col';
+          div.innerHTML = `
+            <img alt="${item.alt}" class="w-full h-48 object-cover" height="300" src="${item.img}" width="400"/>
+            <div class="p-4 flex flex-col flex-grow">
+              <h3 class="font-semibold text-yellow-800 text-lg mb-2">${item.name}</h3>
+              <p class="text-yellow-700 flex-grow">${item.desc}</p>
+              <button class="mt-4 bg-yellow-600 hover:bg-yellow-700 text-white py-2 rounded-md font-semibold" data-name="${item.name}" data-price="${item.price}">
+                Pesan
+              </button>
+            </div>
+          `;
+          menuList.appendChild(div);
+        });
+        addMenuPesanListeners(); // Re-attach listeners after re-rendering
+      }
+
+      // Render menu items for admin dashboard
+      function renderAdminMenu() {
+        adminMenuList.innerHTML = '';
+        if (menuKopi.length === 0) {
+          noAdminMenuMessage.classList.remove('hidden');
+          return;
+        }
+        noAdminMenuMessage.classList.add('hidden');
+        menuKopi.forEach((item) => {
+          const tr = document.createElement('tr');
+          tr.className = 'border-b border-yellow-200 hover:bg-yellow-100';
+          tr.innerHTML = `
+            <td class="py-3 px-6 text-left whitespace-nowrap">${item.name}</td>
+            <td class="py-3 px-6 text-left">Rp${item.price.toLocaleString()}</td>
+            <td class="py-3 px-6 text-left">${item.desc}</td>
+            <td class="py-3 px-6 text-center">
+                <img src="${item.img}" alt="${item.alt}" class="w-16 h-16 object-cover rounded-md mx-auto" />
+            </td>
+            <td class="py-3 px-6 text-center">
+              <div class="flex item-center justify-center">
+                <button data-id="${item.id}" class="btnEditMenu w-8 h-8 mr-2 rounded-full bg-yellow-400 hover:bg-yellow-500 text-yellow-900 flex items-center justify-center" title="Edit">
+                  <i class="fas fa-edit"></i>
+                </button>
+                <button data-id="${item.id}" class="btnDeleteMenu w-8 h-8 rounded-full bg-red-500 hover:bg-red-600 text-white flex items-center justify-center" title="Hapus">
+                  <i class="fas fa-trash-alt"></i>
+                </button>
+              </div>
+            </td>
+          `;
+          adminMenuList.appendChild(tr);
+        });
+      }
+
+      // Reset menu CRUD form
+      function resetMenuForm() {
+        formMenuCrud.reset();
+        menuIdInput.value = '';
+        menuFormTitle.textContent = 'Tambah Menu Baru';
+        btnSaveMenu.textContent = 'Tambah Menu';
+        btnSaveMenu.classList.remove('bg-green-600', 'hover:bg-green-700');
+        btnSaveMenu.classList.add('bg-yellow-600', 'hover:bg-yellow-700');
+        btnCancelEdit.classList.add('hidden');
+      }
+
+      // Event Listeners
+
+      // Navigation buttons
+      btnGoToDashboard.addEventListener('click', () => {
+        showPage(pageDashboard);
+      });
+      btnBeranda.addEventListener('click', () => {
+        showPage(pageBeranda);
+      });
+      btnMenu.addEventListener('click', () => {
+        showPage(pageMenu);
+        renderPublicMenu(); // Ensure public menu is rendered with latest data
+      });
+      btnKontak.addEventListener('click', () => {
+        showPage(pageKontak);
+      });
+      btnReservasi.addEventListener('click', () => {
+        showPage(pagePesanSekarang);
+        showMetode(1);
+      });
+      btnKeranjang.addEventListener('click', () => {
+        showPage(pageKeranjang);
+        renderCart();
+      });
+      btnPesanSekarang.addEventListener('click', () => {
+        showPage(pagePesanSekarang);
+        showMetode(1);
+      });
+      btnAdminLogin.addEventListener('click', () => { // New
+        if (isAdminLoggedIn()) {
+            showPage(pageAdminDashboard);
+            renderAdminMenu();
+            resetMenuForm();
+        } else {
+            showPage(pageAdminLogin);
+        }
+      });
+      btnAdminLogout.addEventListener('click', () => { // New
+        setAdminLoggedIn(false);
+        alert('Anda telah logout dari akun admin.');
+        showPage(pageWelcome);
+      });
+
+      // Dashboard cards click
+      dashBeranda.addEventListener('click', () => {
+        showPage(pageBeranda);
+      });
+      dashMenu.addEventListener('click', () => {
+        showPage(pageMenu);
+        renderPublicMenu(); // Ensure public menu is rendered with latest data
+      });
+      dashKontak.addEventListener('click', () => {
+        showPage(pageKontak);
+      });
+      dashReservasi.addEventListener('click', () => {
+        showPage(pagePesanSekarang);
+        showMetode(1);
+      });
+      dashKeranjang.addEventListener('click', () => {
+        showPage(pageKeranjang);
+        renderCart();
+      });
+      dashPesanSekarang.addEventListener('click', () => {
+        showPage(pagePesanSekarang);
+        showMetode(1);
+      });
+
+      // Metode buttons
+      metode1Btn.addEventListener('click', () => {
+        showMetode(1);
+      });
+      metode2Btn.addEventListener('click', () => {
+        showMetode(2);
+      });
+
+      function showMetode(num) {
+        if (num === 1) {
+          formMetode1.classList.remove('hidden');
+          formMetode2.classList.add('hidden');
+          metode1Btn.classList.add('bg-yellow-600', 'text-white');
+          metode1Btn.classList.remove('bg-yellow-400', 'text-yellow-900');
+          metode2Btn.classList.add('bg-yellow-400', 'text-yellow-900');
+          metode2Btn.classList.remove('bg-yellow-600', 'text-white');
+        } else {
+          formMetode2.classList.remove('hidden');
+          formMetode1.classList.add('hidden');
+          metode2Btn.classList.add('bg-yellow-600', 'text-white');
+          metode2Btn.classList.remove('bg-yellow-400', 'text-yellow-900');
+          metode1Btn.classList.add('bg-yellow-400', 'text-yellow-900');
+          metode1Btn.classList.remove('bg-yellow-600', 'text-white');
+        }
+      }
+
+      // Add event listeners to menu "Pesan" buttons
+      function addMenuPesanListeners() {
+        const buttons = menuList.querySelectorAll('button');
+        buttons.forEach((btn) => {
+          btn.addEventListener('click', () => {
+            const name = btn.getAttribute('data-name');
+            const price = parseInt(btn.getAttribute('data-price'));
+            addToCart(name, price, 1);
+            alert(`Berhasil menambahkan ${name} ke keranjang.`);
+          });
+        });
+      }
+
+      // Form Metode 1 submit
+      formMetode1.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const kopi = formMetode1.kopi.value;
+        const jumlah = parseInt(formMetode1.jumlah.value);
+        const nama = formMetode1.nama.value.trim();
+        const nohp = formMetode1.nohp.value.trim();
+        const tanggal = formMetode1.tanggal.value;
+        const pembayaran = formMetode1.pembayaran.value;
+
+        if (!kopi || !jumlah || !nama || !nohp || !tanggal || !pembayaran) {
+          alert('Mohon lengkapi semua data.');
+          return;
+        }
+
+        const menuItem = menuKopi.find((m) => m.name === kopi);
+        if (!menuItem) {
+          alert('Menu kopi tidak ditemukan.');
+          return;
+        }
+
+        const data = {
+          kopi,
+          jumlah,
+          nama,
+          nohp,
+          tanggal,
+          pembayaran,
+          harga: menuItem.price,
+        };
+
+        // Add to cart
+        addToCart(kopi, menuItem.price, jumlah);
+
+        // Generate PDF
+        const doc = generatePDF(data, 1);
+        doc.save(`Resi_Pesanan_Kopi_Senja_${nama.replace(/\s+/g, '_')}.pdf`);
+
+        alert('Pesanan berhasil dibuat dan resi telah diunduh.');
+
+        formMetode1.reset();
+        showPage(pageDashboard);
+      });
+
+      // Form Metode 2 submit
+      formMetode2.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const kopi = formMetode2.kopi.value;
+        const jumlah = parseInt(formMetode2.jumlah.value);
+        const nama = formMetode2.nama.value.trim();
+        const nohp = formMetode2.nohp.value.trim();
+        const pembayaran = formMetode2.pembayaran.value;
+        const ekspedisi = formMetode2.ekspedisi.value;
+
+        if (!kopi || !jumlah || !nama || !nohp || !pembayaran || !ekspedisi) {
+          alert('Mohon lengkapi semua data.');
+          return;
+        }
+
+        const menuItem = menuKopi.find((m) => m.name === kopi);
+        if (!menuItem) {
+          alert('Menu kopi tidak ditemukan.');
+          return;
+        }
+
+        const data = {
+          kopi,
+          jumlah,
+          nama,
+          nohp,
+          pembayaran,
+          ekspedisi,
+          harga: menuItem.price,
+        };
+
+        // Add to cart
+        addToCart(kopi, menuItem.price, jumlah);
+
+        // Generate PDF
+        const doc = generatePDF(data, 2);
+        doc.save(`Resi_Pesanan_Kopi_Senja_${nama.replace(/\s+/g, '_')}.pdf`);
+
+        alert('Pesanan berhasil dibuat dan resi telah diunduh.');
+
+        formMetode2.reset();
+        showPage(pageDashboard);
+      });
+
+      // Cart buttons (edit, remove)
+      cartItems.addEventListener('click', (e) => {
+        if (e.target.closest('.btnRemoveCart')) {
+          const index = parseInt(e.target.closest('.btnRemoveCart').dataset.index);
+          if (confirm('Hapus item dari keranjang?')) {
+            removeFromCart(index);
+          }
+        } else if (e.target.closest('.btnEditCart')) {
+          const index = parseInt(e.target.closest('.btnEditCart').dataset.index);
+          editCartItem(index);
+        }
+      });
+
+      // Ulasan form submit
+      formUlasan.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const nama = formUlasan.nama.value.trim();
+        const ulasan = formUlasan.ulasan.value.trim();
+        if (!nama || !ulasan) {
+          alert('Mohon isi nama dan ulasan.');
+          return;
+        }
+        const id = Date.now();
+        ulasanData.push({ id, nama, ulasan });
+        renderUlasan();
+        formUlasan.reset();
+        alert('Terima kasih atas ulasan Anda!');
+      });
+
+      // Ulasan edit button
+      ulasanList.addEventListener('click', (e) => {
+        if (e.target.closest('.btnEditUlasan')) {
+          const id = parseInt(e.target.closest('.btnEditUlasan').dataset.id);
+          editUlasan(id);
+        }
+      });
+
+      // --- Admin Event Listeners (New) ---
+
+      // Admin Login Form Submit
+      formAdminLogin.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const username = adminUsernameInput.value;
+        const password = adminPasswordInput.value;
+
+        if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+          setAdminLoggedIn(true);
+          alert('Login admin berhasil!');
+          showPage(pageAdminDashboard);
+          renderAdminMenu();
+          resetMenuForm();
+        } else {
+          alert('Username atau password salah!');
+          adminPasswordInput.value = ''; // Clear password field
+        }
+      });
+
+      // Menu CRUD Form Submit
+      formMenuCrud.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const id = menuIdInput.value;
+        const name = menuNameInput.value.trim();
+        const price = parseInt(menuPriceInput.value);
+        const img = menuImgInput.value.trim();
+        const alt = menuAltInput.value.trim();
+        const desc = menuDescInput.value.trim();
+
+        if (!name || isNaN(price) || price < 0 || !desc) {
+            alert('Mohon lengkapi semua data menu dengan benar (Nama, Harga, Deskripsi).');
+            return;
+        }
+
+        if (id) {
+          // Edit existing menu
+          const index = menuKopi.findIndex(item => item.id === id);
+          if (index !== -1) {
+            menuKopi[index] = { id, name, price, img, alt, desc };
+            alert('Menu berhasil diperbarui!');
+          }
+        } else {
+          // Add new menu
+          const newId = name.toLowerCase().replace(/\s+/g, '-'); // Simple ID generation
+          // Check for duplicate name
+          if (menuKopi.some(item => item.name.toLowerCase() === name.toLowerCase())) {
+              alert('Nama menu sudah ada. Mohon gunakan nama lain.');
+              return;
+          }
+          menuKopi.push({ id: newId, name, price, img, alt, desc });
+          alert('Menu baru berhasil ditambahkan!');
+        }
+
+        saveMenuData();
+        renderAdminMenu();
+        renderPublicMenu(); // Update public menu display
+        initMenuSelects(); // Update select options in order forms
+        resetMenuForm();
+      });
+
+      // Edit and Delete buttons in Admin Menu List
+      adminMenuList.addEventListener('click', (e) => {
+        if (e.target.closest('.btnEditMenu')) {
+          const idToEdit = e.target.closest('.btnEditMenu').dataset.id;
+          const itemToEdit = menuKopi.find(item => item.id === idToEdit);
+          if (itemToEdit) {
+            menuIdInput.value = itemToEdit.id;
+            menuNameInput.value = itemToEdit.name;
+            menuPriceInput.value = itemToEdit.price;
+            menuImgInput.value = itemToEdit.img;
+            menuAltInput.value = itemToEdit.alt;
+            menuDescInput.value = itemToEdit.desc;
+
+            menuFormTitle.textContent = `Edit Menu: ${itemToEdit.name}`;
+            btnSaveMenu.textContent = 'Simpan Perubahan';
+            btnSaveMenu.classList.remove('bg-yellow-600', 'hover:bg-yellow-700');
+            btnSaveMenu.classList.add('bg-green-600', 'hover:bg-green-700');
+            btnCancelEdit.classList.remove('hidden');
+          }
+        } else if (e.target.closest('.btnDeleteMenu')) {
+          const idToDelete = e.target.closest('.btnDeleteMenu').dataset.id;
+          if (confirm('Apakah Anda yakin ingin menghapus menu ini?')) {
+            menuKopi = menuKopi.filter(item => item.id !== idToDelete);
+            saveMenuData();
+            renderAdminMenu();
+            renderPublicMenu(); // Update public menu display
+            initMenuSelects(); // Update select options in order forms
+            alert('Menu berhasil dihapus!');
+            resetMenuForm(); // Reset form in case it was in edit mode for the deleted item
+          }
+        }
+      });
+
+      // Cancel Edit button
+      btnCancelEdit.addEventListener('click', resetMenuForm);
+
+
+      // Initialize
+      function init() {
+        loadMenuData(); // Load menu data first
+        showPage(pageWelcome);
+        initMenuSelects();
+        renderPublicMenu(); // Render public menu with loaded data
+        updateCartCount();
+        renderPromo();
+        renderUlasan();
+
+        // If admin was logged in, redirect to dashboard
+        if (isAdminLoggedIn()) {
+            showPage(pageAdminDashboard);
+            renderAdminMenu();
+            resetMenuForm();
+        }
+      }
+
+      init();
+    })();
+  </script>
+ </body>
+</html>
